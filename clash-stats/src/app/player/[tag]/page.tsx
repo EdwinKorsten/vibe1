@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Layout from '@/components/Layout';
 import { Player } from '@/lib/types';
-import { Trophy, Star, Shield, Zap, Users, Award, Target, Sword } from 'lucide-react';
+import { Trophy, Star, Shield, Zap, Users, Award, Target, Sword, Crown, Flame, Sparkles, Bot, Hammer, Crosshair } from 'lucide-react';
 
 export default function PlayerPage() {
   const params = useParams();
@@ -17,6 +17,38 @@ export default function PlayerPage() {
     if (player?.clan?.tag) {
       router.push(`/clan/${encodeURIComponent(player.clan.tag)}`);
     }
+  };
+
+  const getTroopIcon = (troopName: string) => {
+    const name = troopName.toLowerCase();
+    
+    if (name.includes('barbarian') || name.includes('archer') || name.includes('giant') || name.includes('goblin')) {
+      return <Users className="h-5 w-5 text-orange-500" />;
+    }
+    if (name.includes('wizard') || name.includes('witch') || name.includes('bowler')) {
+      return <Sparkles className="h-5 w-5 text-purple-500" />;
+    }
+    if (name.includes('dragon') || name.includes('phoenix') || name.includes('fire')) {
+      return <Flame className="h-5 w-5 text-red-500" />;
+    }
+    if (name.includes('pekka') || name.includes('golem') || name.includes('lava')) {
+      return <Bot className="h-5 w-5 text-gray-600" />;
+    }
+    if (name.includes('miner') || name.includes('wall') || name.includes('breaker')) {
+      return <Hammer className="h-5 w-5 text-brown-500" />;
+    }
+    if (name.includes('hog') || name.includes('rider') || name.includes('cavalry')) {
+      return <Target className="h-5 w-5 text-blue-500" />;
+    }
+    if (name.includes('balloon') || name.includes('minion') || name.includes('baby')) {
+      return <Zap className="h-5 w-5 text-yellow-500" />;
+    }
+    if (name.includes('valkyrie') || name.includes('electro') || name.includes('super')) {
+      return <Crown className="h-5 w-5 text-gold-500" />;
+    }
+    
+    // Default icon
+    return <Sword className="h-5 w-5 text-gray-500" />;
   };
 
   useEffect(() => {
@@ -200,6 +232,80 @@ export default function PlayerPage() {
                       className="bg-blue-600 h-2 rounded-full" 
                       style={{ width: `${(hero.level / hero.maxLevel) * 100}%` }}
                     ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {player.troops && player.troops.length > 0 && (
+          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Army Troops</h2>
+            <div className="grid md:grid-cols-4 gap-4">
+              {player.troops.map((troop, index) => (
+                <div key={index} className="p-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border hover:shadow-md transition-shadow">
+                  <div className="flex items-center space-x-3 mb-3">
+                    {getTroopIcon(troop.name)}
+                    <h3 className="font-semibold text-gray-900 text-sm">{troop.name}</h3>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-gray-600">Level</span>
+                      <span className="font-bold text-blue-600">{troop.level}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-gray-600">Max Level</span>
+                      <span className="text-xs text-gray-500">{troop.maxLevel}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300" 
+                        style={{ width: `${(troop.level / troop.maxLevel) * 100}%` }}
+                      ></div>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-xs text-gray-500">
+                        {Math.round((troop.level / troop.maxLevel) * 100)}% upgraded
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {player.spells && player.spells.length > 0 && (
+          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Spells</h2>
+            <div className="grid md:grid-cols-4 gap-4">
+              {player.spells.map((spell, index) => (
+                <div key={index} className="p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border hover:shadow-md transition-shadow">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Sparkles className="h-5 w-5 text-purple-500" />
+                    <h3 className="font-semibold text-gray-900 text-sm">{spell.name}</h3>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-gray-600">Level</span>
+                      <span className="font-bold text-purple-600">{spell.level}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-gray-600">Max Level</span>
+                      <span className="text-xs text-gray-500">{spell.maxLevel}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300" 
+                        style={{ width: `${(spell.level / spell.maxLevel) * 100}%` }}
+                      ></div>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-xs text-gray-500">
+                        {Math.round((spell.level / spell.maxLevel) * 100)}% upgraded
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}
