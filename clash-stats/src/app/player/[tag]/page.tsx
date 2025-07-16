@@ -1,16 +1,23 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Layout from '@/components/Layout';
 import { Player } from '@/lib/types';
 import { Trophy, Star, Shield, Zap, Users, Award, Target, Sword } from 'lucide-react';
 
 export default function PlayerPage() {
   const params = useParams();
+  const router = useRouter();
   const [player, setPlayer] = useState<Player | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const handleClanClick = () => {
+    if (player?.clan?.tag) {
+      router.push(`/clan/${encodeURIComponent(player.clan.tag)}`);
+    }
+  };
 
   useEffect(() => {
     const fetchPlayer = async () => {
@@ -163,8 +170,18 @@ export default function PlayerPage() {
                 className="w-12 h-12"
               />
               <div>
-                <h3 className="font-semibold text-gray-900">{player.clan.name}</h3>
-                <p className="text-gray-500">{player.clan.tag}</p>
+                <h3 
+                  className="font-semibold text-gray-900 hover:text-blue-600 cursor-pointer transition-colors"
+                  onClick={handleClanClick}
+                >
+                  {player.clan.name}
+                </h3>
+                <p 
+                  className="text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
+                  onClick={handleClanClick}
+                >
+                  {player.clan.tag}
+                </p>
               </div>
             </div>
           </div>
