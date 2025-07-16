@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Layout from '@/components/Layout';
 import { Player } from '@/lib/types';
-import { Trophy, Star, Shield, Zap, Users, Award, Target, Sword, Crown, Flame, Sparkles, Bot, Hammer, Crosshair } from 'lucide-react';
+import { Trophy, Star, Shield, Zap, Users, Award, Target, Sword, Crown, Flame, Sparkles, Bot, Hammer, Crosshair, Skull, Heart, Bolt, Eye, ArrowUp, Snowflake } from 'lucide-react';
 
 export default function PlayerPage() {
   const params = useParams();
@@ -23,32 +23,79 @@ export default function PlayerPage() {
     const name = troopName.toLowerCase();
     
     if (name.includes('barbarian') || name.includes('archer') || name.includes('giant') || name.includes('goblin')) {
-      return <Users className="h-5 w-5 text-orange-500" />;
+      return <Users className="h-6 w-6 text-orange-500" />;
     }
     if (name.includes('wizard') || name.includes('witch') || name.includes('bowler')) {
-      return <Sparkles className="h-5 w-5 text-purple-500" />;
+      return <Sparkles className="h-6 w-6 text-purple-500" />;
     }
     if (name.includes('dragon') || name.includes('phoenix') || name.includes('fire')) {
-      return <Flame className="h-5 w-5 text-red-500" />;
+      return <Flame className="h-6 w-6 text-red-500" />;
     }
     if (name.includes('pekka') || name.includes('golem') || name.includes('lava')) {
-      return <Bot className="h-5 w-5 text-gray-600" />;
+      return <Bot className="h-6 w-6 text-gray-600" />;
     }
     if (name.includes('miner') || name.includes('wall') || name.includes('breaker')) {
-      return <Hammer className="h-5 w-5 text-brown-500" />;
+      return <Hammer className="h-6 w-6 text-amber-600" />;
     }
     if (name.includes('hog') || name.includes('rider') || name.includes('cavalry')) {
-      return <Target className="h-5 w-5 text-blue-500" />;
+      return <Target className="h-6 w-6 text-blue-500" />;
     }
     if (name.includes('balloon') || name.includes('minion') || name.includes('baby')) {
-      return <Zap className="h-5 w-5 text-yellow-500" />;
+      return <Zap className="h-6 w-6 text-yellow-500" />;
     }
     if (name.includes('valkyrie') || name.includes('electro') || name.includes('super')) {
-      return <Crown className="h-5 w-5 text-gold-500" />;
+      return <Crown className="h-6 w-6 text-yellow-600" />;
+    }
+    if (name.includes('yeti') || name.includes('ice') || name.includes('snow')) {
+      return <Snowflake className="h-6 w-6 text-blue-400" />;
+    }
+    if (name.includes('headhunter') || name.includes('assassin')) {
+      return <Crosshair className="h-6 w-6 text-red-600" />;
     }
     
     // Default icon
-    return <Sword className="h-5 w-5 text-gray-500" />;
+    return <Sword className="h-6 w-6 text-gray-500" />;
+  };
+
+  const getSpellIcon = (spellName: string) => {
+    const name = spellName.toLowerCase();
+    
+    if (name.includes('lightning') || name.includes('bolt') || name.includes('electric')) {
+      return <Bolt className="h-6 w-6 text-yellow-500" />;
+    }
+    if (name.includes('healing') || name.includes('heal') || name.includes('heart')) {
+      return <Heart className="h-6 w-6 text-green-500" />;
+    }
+    if (name.includes('rage') || name.includes('anger') || name.includes('fury')) {
+      return <Flame className="h-6 w-6 text-red-500" />;
+    }
+    if (name.includes('jump') || name.includes('leap') || name.includes('up')) {
+      return <ArrowUp className="h-6 w-6 text-blue-500" />;
+    }
+    if (name.includes('freeze') || name.includes('ice') || name.includes('cold')) {
+      return <Snowflake className="h-6 w-6 text-cyan-500" />;
+    }
+    if (name.includes('clone') || name.includes('duplicate') || name.includes('copy')) {
+      return <Users className="h-6 w-6 text-purple-500" />;
+    }
+    if (name.includes('invisibility') || name.includes('invisible') || name.includes('stealth')) {
+      return <Eye className="h-6 w-6 text-gray-500" />;
+    }
+    if (name.includes('poison') || name.includes('toxic') || name.includes('venom')) {
+      return <Skull className="h-6 w-6 text-green-600" />;
+    }
+    if (name.includes('skeleton') || name.includes('bone') || name.includes('skull')) {
+      return <Skull className="h-6 w-6 text-gray-400" />;
+    }
+    if (name.includes('bat') || name.includes('wing') || name.includes('fly')) {
+      return <Zap className="h-6 w-6 text-purple-600" />;
+    }
+    if (name.includes('haste') || name.includes('speed') || name.includes('fast')) {
+      return <Target className="h-6 w-6 text-orange-500" />;
+    }
+    
+    // Default icon
+    return <Sparkles className="h-6 w-6 text-blue-500" />;
   };
 
   useEffect(() => {
@@ -283,7 +330,7 @@ export default function PlayerPage() {
               {player.spells.map((spell, index) => (
                 <div key={index} className="p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border hover:shadow-md transition-shadow">
                   <div className="flex items-center space-x-3 mb-3">
-                    <Sparkles className="h-5 w-5 text-purple-500" />
+                    {getSpellIcon(spell.name)}
                     <h3 className="font-semibold text-gray-900 text-sm">{spell.name}</h3>
                   </div>
                   <div className="space-y-2">
