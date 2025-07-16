@@ -19,5 +19,5 @@ npm-debug.log.*
 *.orig
 classes/
 
-clash-stats/.next
+.next
 .env.local
