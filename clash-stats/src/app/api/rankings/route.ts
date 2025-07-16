@@ -4,26 +4,22 @@ import { ClashAPI } from '@/lib/clash-api';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get('type') || 'global';
     const category = searchParams.get('category') || 'players';
-    const locationId = searchParams.get('locationId') || 'global';
+    const locationId = searchParams.get('locationId');
+
+    if (!locationId) {
+      return NextResponse.json(
+        { error: 'Location ID is required' },
+        { status: 400 }
+      );
+    }
 
     let rankings;
 
-    if (locationId === 'global') {
-      if (category === 'players') {
-        const leagueId = '29000022';
-        rankings = await ClashAPI.getLeagueRankings(leagueId);
-      } else {
-        const locations = await ClashAPI.getLocations();
-        rankings = locations.items;
-      }
+    if (category === 'players') {
+      rankings = await ClashAPI.getLocationRankings(locationId);
     } else {
-      if (category === 'players') {
-        rankings = await ClashAPI.getLocationRankings(locationId);
-      } else {
-        rankings = await ClashAPI.getLocationClanRankings(locationId);
-      }
+      rankings = await ClashAPI.getLocationClanRankings(locationId);
     }
 
     return NextResponse.json(rankings);

@@ -42,7 +42,7 @@ export default function RankingsPage() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState<'players' | 'clans'>('players');
-  const [selectedLocation, setSelectedLocation] = useState<string>('global');
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -50,7 +50,13 @@ export default function RankingsPage() {
         const response = await fetch('/api/locations');
         if (response.ok) {
           const data = await response.json();
-          setLocations(data.items || []);
+          const locationItems = data.items || [];
+          setLocations(locationItems);
+          
+          // Set the first country location as default if not already set
+          if (!selectedLocation && locationItems.length > 0) {
+            setSelectedLocation(locationItems[0].id.toString());
+          }
         }
       } catch (error) {
         console.error('Error fetching locations:', error);
@@ -62,6 +68,12 @@ export default function RankingsPage() {
 
   useEffect(() => {
     const fetchRankings = async () => {
+      // Don't fetch rankings if no location is selected
+      if (!selectedLocation) {
+        setLoading(false);
+        return;
+      }
+      
       try {
         setLoading(true);
         const response = await fetch(
@@ -74,6 +86,7 @@ export default function RankingsPage() {
         }
       } catch (error) {
         console.error('Error fetching rankings:', error);
+        setRankings([]);
       } finally {
         setLoading(false);
       }
@@ -120,7 +133,9 @@ export default function RankingsPage() {
                 onChange={(e) => setSelectedLocation(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                <option value="global">Global</option>
+                {!selectedLocation && (
+                  <option value="">Select a location</option>
+                )}
                 {locations.map((location) => (
                   <option key={location.id} value={location.id.toString()}>
                     {location.name}
