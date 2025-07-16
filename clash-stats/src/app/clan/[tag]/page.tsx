@@ -19,13 +19,20 @@ export default function ClanPage() {
       try {
         setLoading(true);
         
-        const [clanResponse, warLogResponse] = await Promise.allSettled([
+        const [clanResponse, membersResponse, warLogResponse] = await Promise.allSettled([
           fetch(`/api/clan/${params.tag}`),
+          fetch(`/api/clan/${params.tag}/members`),
           fetch(`/api/clan/${params.tag}/warlog`)
         ]);
 
         if (clanResponse.status === 'fulfilled' && clanResponse.value.ok) {
           const clanData = await clanResponse.value.json();
+          
+          if (membersResponse.status === 'fulfilled' && membersResponse.value.ok) {
+            const membersData = await membersResponse.value.json();
+            clanData.members = membersData.items || membersData;
+          }
+          
           setClan(clanData);
         } else {
           throw new Error('Clan not found');
