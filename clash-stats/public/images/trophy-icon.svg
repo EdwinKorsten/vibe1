@@ -1,0 +1,47 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="trophyGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="trophyBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shine" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Trophy base -->
+  <rect x="20" y="52" width="24" height="8" rx="2" fill="url(#trophyBase)" stroke="#4A4A4A" stroke-width="1"/>
+  
+  <!-- Trophy stem -->
+  <rect x="30" y="42" width="4" height="12" fill="url(#trophyBase)" stroke="#4A4A4A" stroke-width="1"/>
+  
+  <!-- Trophy cup -->
+  <path d="M16 20 Q16 12 24 12 L40 12 Q48 12 48 20 L48 32 Q48 40 40 40 L24 40 Q16 40 16 32 Z" 
+        fill="url(#trophyGold)" 
+        stroke="#B8860B" 
+        stroke-width="2"/>
+  
+  <!-- Trophy handles -->
+  <ellipse cx="12" cy="26" rx="4" ry="8" fill="url(#trophyGold)" stroke="#B8860B" stroke-width="2"/>
+  <ellipse cx="52" cy="26" rx="4" ry="8" fill="url(#trophyGold)" stroke="#B8860B" stroke-width="2"/>
+  
+  <!-- Trophy shine -->
+  <ellipse cx="28" cy="20" rx="3" ry="6" fill="#FFFFFF" opacity="0.4" filter="url(#shine)"/>
+  
+  <!-- Trophy rim -->
+  <ellipse cx="32" cy="16" rx="14" ry="3" fill="url(#trophyGold)" stroke="#B8860B" stroke-width="1"/>
+  
+  <!-- Decorative star -->
+  <polygon points="32,26 34,22 38,22 35,19 36,15 32,17 28,15 29,19 26,22 30,22" 
+           fill="#FFFFFF" 
+           opacity="0.8"/>
+</svg>

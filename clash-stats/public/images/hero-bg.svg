@@ -1,0 +1,95 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#98D8E8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#32CD32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="castleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D2691E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="800" height="280" fill="url(#skyGradient)"/>
+  
+  <!-- Ground -->
+  <rect x="0" y="280" width="800" height="120" fill="url(#grassGradient)"/>
+  
+  <!-- Castle towers -->
+  <rect x="150" y="180" width="80" height="120" fill="url(#castleGradient)" stroke="#654321" stroke-width="2"/>
+  <rect x="250" y="160" width="90" height="140" fill="url(#castleGradient)" stroke="#654321" stroke-width="2"/>
+  <rect x="350" y="170" width="85" height="130" fill="url(#castleGradient)" stroke="#654321" stroke-width="2"/>
+  <rect x="450" y="185" width="75" height="115" fill="url(#castleGradient)" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Castle tower tops -->
+  <polygon points="150,180 190,160 230,180" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <polygon points="250,160 295,140 340,160" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <polygon points="350,170 392,150 435,170" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <polygon points="450,185 487,165 525,185" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Castle flags -->
+  <rect x="188" y="150" width="4" height="30" fill="#654321"/>
+  <polygon points="192,150 192,160 205,155" fill="#FF0000"/>
+  <rect x="293" y="130" width="4" height="30" fill="#654321"/>
+  <polygon points="297,130 297,140 310,135" fill="#0000FF"/>
+  <rect x="390" y="140" width="4" height="30" fill="#654321"/>
+  <polygon points="394,140 394,150 407,145" fill="#00FF00"/>
+  
+  <!-- Castle windows -->
+  <rect x="170" y="220" width="15" height="20" fill="#000000" rx="7"/>
+  <rect x="200" y="220" width="15" height="20" fill="#000000" rx="7"/>
+  <rect x="270" y="200" width="15" height="20" fill="#000000" rx="7"/>
+  <rect x="300" y="200" width="15" height="20" fill="#000000" rx="7"/>
+  <rect x="370" y="210" width="15" height="20" fill="#000000" rx="7"/>
+  <rect x="470" y="225" width="15" height="20" fill="#000000" rx="7"/>
+  
+  <!-- Castle gate -->
+  <rect x="285" y="250" width="30" height="50" fill="#654321" stroke="#8B4513" stroke-width="2"/>
+  <path d="M285 300 Q300 290 315 300" fill="none" stroke="#8B4513" stroke-width="2"/>
+  
+  <!-- Clouds -->
+  <ellipse cx="100" cy="50" rx="30" ry="20" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="120" cy="50" rx="25" ry="15" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="140" cy="50" rx="20" ry="12" fill="#FFFFFF" opacity="0.8"/>
+  
+  <ellipse cx="600" cy="80" rx="35" ry="25" fill="#FFFFFF" opacity="0.7"/>
+  <ellipse cx="625" cy="80" rx="30" ry="20" fill="#FFFFFF" opacity="0.7"/>
+  <ellipse cx="650" cy="80" rx="25" ry="15" fill="#FFFFFF" opacity="0.7"/>
+  
+  <!-- Trees -->
+  <ellipse cx="50" cy="260" rx="25" ry="35" fill="#228B22"/>
+  <rect x="47" y="280" width="6" height="20" fill="#8B4513"/>
+  
+  <ellipse cx="700" cy="250" rx="30" ry="40" fill="#228B22"/>
+  <rect x="697" y="275" width="6" height="25" fill="#8B4513"/>
+  
+  <ellipse cx="750" cy="270" rx="20" ry="30" fill="#228B22"/>
+  <rect x="747" y="285" width="6" height="15" fill="#8B4513"/>
+  
+  <!-- Gems scattered around -->
+  <polygon points="80,320 85,310 90,320 85,330" fill="#FF0000" filter="url(#glow)"/>
+  <polygon points="120,330 125,320 130,330 125,340" fill="#00FF00" filter="url(#glow)"/>
+  <polygon points="680,310 685,300 690,310 685,320" fill="#0000FF" filter="url(#glow)"/>
+  <polygon points="720,340 725,330 730,340 725,350" fill="#FF00FF" filter="url(#glow)"/>
+  
+  <!-- Sun -->
+  <circle cx="650" cy="60" r="25" fill="#FFD700" opacity="0.9"/>
+  <path d="M650 25 L650 35 M675 60 L685 60 M650 85 L650 95 M625 60 L615 60 M670 40 L677 33 M670 80 L677 87 M630 40 L623 33 M630 80 L623 87" 
+        stroke="#FFD700" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+</svg>
