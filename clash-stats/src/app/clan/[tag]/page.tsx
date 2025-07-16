@@ -111,7 +111,7 @@ export default function ClanPage() {
             </div>
             <div className="text-center p-4 bg-blue-50 rounded-lg">
               <Users className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-gray-900">{clan.memberCount}/50</p>
+              <p className="text-2xl font-bold text-gray-900">{clan.members?.length || 0}/50</p>
               <p className="text-sm text-gray-600">Members</p>
             </div>
             <div className="text-center p-4 bg-green-50 rounded-lg">
@@ -186,7 +186,7 @@ export default function ClanPage() {
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Members ({clan.memberCount})</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Members ({clan.members?.length || 0})</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
